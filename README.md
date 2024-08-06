@@ -44,8 +44,8 @@ desafioQa/
 1. **Clone o repositório:**
 
    ```bash
-   git clone https://github.com/vulgolari/desafioQa.git
-   cd desafioQa
+   git clone https://github.com/vulgolari/desafio-quality/
+   cd desafio-quality
    ```
 
 2. **Instale as dependências:**
