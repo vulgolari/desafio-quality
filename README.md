@@ -67,7 +67,6 @@ desafioQa/
 ## Estrutura dos Testes
 
 - **JsonPlaceholderTest**: Testes para a API JSONPlaceholder, incluindo métodos de requisição GET, POST, PUT, PATCH e DELETE.
-- **PokeApiTest**: Testes para a API PokeAPI, incluindo métodos de requisição GET.
 
 ## Contribuições
 
