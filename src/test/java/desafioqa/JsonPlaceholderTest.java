@@ -12,38 +12,38 @@ public class JsonPlaceholderTest {
 
     @BeforeAll
     public static void setup() {
-        // Define a base URL
+        // Define a URL base para a API JSONPlaceholder
         RestAssured.baseURI = "https://jsonplaceholder.typicode.com";
     }
 
     @Test
     public void testGetPosts() {
-        // Faz a requisição para o endpoint /posts
+        // Faz uma requisição GET para o endpoint /posts
         Response response = given()
                 .when()
                 .get("/posts")
                 .then()
-                .statusCode(200)  // Verifica se o status code é 200
+                .statusCode(200)  // Verifica se o código de status da resposta é 200 (OK)
                 .extract()
                 .response();
 
-        // Verifica se o retorno é uma lista de posts
+        // Verifica se o retorno é uma lista de 100 posts
         assertEquals(100, response.jsonPath().getList("$").size(), "Deveria retornar 100 posts.");
     }
 
     @Test
     public void testCreatePost() {
-        // Dados para o novo post
+        // Dados para criar um novo post
         String newPost = "{\"title\": \"foo\", \"body\": \"bar\", \"userId\": 1}";
 
-        // Faz a requisição para o endpoint /posts
+        // Faz uma requisição POST para o endpoint /posts
         Response response = given()
-                .header("Content-Type", "application/json")
-                .body(newPost)
+                .header("Content-Type", "application/json") // Define o tipo de conteúdo como JSON
+                .body(newPost) // Define o corpo da requisição com os dados do novo post
                 .when()
                 .post("/posts")
                 .then()
-                .statusCode(201)  // Verifica se o status code é 201 (Created)
+                .statusCode(201)  // Verifica se o código de status da resposta é 201 (Created)
                 .extract()
                 .response();
 
@@ -55,17 +55,17 @@ public class JsonPlaceholderTest {
 
     @Test
     public void testUpdatePost() {
-        // Dados para atualizar o post
+        // Dados para atualizar o post com ID 1
         String updatedPost = "{\"id\": 1, \"title\": \"foo updated\", \"body\": \"bar updated\", \"userId\": 1}";
 
-        // Faz a requisição para o endpoint /posts/1
+        // Faz uma requisição PUT para o endpoint /posts/1
         Response response = given()
-                .header("Content-Type", "application/json")
-                .body(updatedPost)
+                .header("Content-Type", "application/json") // Define o tipo de conteúdo como JSON
+                .body(updatedPost) // Define o corpo da requisição com os dados atualizados do post
                 .when()
                 .put("/posts/1")
                 .then()
-                .statusCode(200)  // Verifica se o status code é 200 (OK)
+                .statusCode(200)  // Verifica se o código de status da resposta é 200 (OK)
                 .extract()
                 .response();
 
@@ -77,36 +77,36 @@ public class JsonPlaceholderTest {
 
     @Test
     public void testPatchPost() {
-        // Dados para atualizar parcialmente o post 
+        // Dados para atualizar parcialmente o post com ID 1
         String partialUpdate = "{\"title\": \"foo partially updated\"}";
 
-        // Faz a requisição para o endpoint /posts/1
+        // Faz uma requisição PATCH para o endpoint /posts/1
         Response response = given()
-                .header("Content-Type", "application/json")
-                .body(partialUpdate)
+                .header("Content-Type", "application/json") // Define o tipo de conteúdo como JSON
+                .body(partialUpdate) // Define o corpo da requisição com os dados parcialmente atualizados do post
                 .when()
                 .patch("/posts/1")
                 .then()
-                .statusCode(200)  // Verifica se o status code é 200 (OK)
+                .statusCode(200)  // Verifica se o código de status da resposta é 200 (OK)
                 .extract()
                 .response();
 
-        // Verifica se o post foi atualizado parcialmente com os dados corretos
+        // Verifica se o post foi parcialmente atualizado com os dados corretos
         assertEquals("foo partially updated", response.jsonPath().getString("title"), "O título do post deveria ser 'foo partially updated'.");
     }
 
     @Test
     public void testDeletePost() {
-        // Faz a requisição para o endpoint /posts/1
+        // Faz uma requisição DELETE para o endpoint /posts/1
         Response response = given()
                 .when()
                 .delete("/posts/1")
                 .then()
-                .statusCode(200)  // Verifica se o status code é 200 (OK)
+                .statusCode(200)  // Verifica se o código de status da resposta é 200 (OK)
                 .extract()
                 .response();
 
-        // Verifica se o corpo da resposta está vazio, indicando exclusão
+        // Verifica se o corpo da resposta está vazio, indicando que o post foi excluído
         assertNotNull(response.body().asString(), "O corpo da resposta deveria estar vazio após a exclusão.");
     }
 }
