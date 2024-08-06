@@ -1,0 +1,36 @@
+# Maven
+/target/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+
+# Eclipse
+/.project
+/.classpath
+/.settings/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos temporários
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Arquivos de configuração do ambiente local
+.env
+*.env
+*.local
+
+# Arquivos binários
+*.exe
+*.dll
+*.so
+
+# Arquivos de backup
+*.bak
